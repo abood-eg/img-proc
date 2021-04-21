@@ -1,6 +1,6 @@
     contents
         1- Intro
-        
+               
             - Abstract
             - Objectives of the project 
             - The need for the project 
@@ -22,11 +22,8 @@
         
         
         
-        
-        
-        
-        
-        
+                            
+               
  Into
  
     abstract 
@@ -73,7 +70,7 @@
  scope of the project 
     
         main actors of the system 
-        
+         
         - the user of the app 
         - the food & the calories     
         
@@ -104,7 +101,16 @@
        
  Feasibility study
    
-    financial feasibility 
+    financial feasibility :
+    
+    since it is a web application and a pounch of studens are designing it no cost for the staff 
+    the application will follow the freeware software standards, low bandwidth is required
+   all the initial stages will be free abviously 
+   -at first we will choose some of related friends and family test the app give us feedbacks 
+   then next stage we will widen the circle of the clints and when it is decided that the application is ready for 
+   the ordinary user to use we are announcing the application to the public 
+   
+   from that the project is financially feasible
     
     
     technical feasibility
@@ -115,6 +121,8 @@
      - visual studio code 
      - git\githup
      - we expect more 
+     
+     all these technologies are free 
      
       
        
