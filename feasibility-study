@@ -141,8 +141,41 @@ Users of the project ::
     
     
     
+ considerations 
+  
+  performance
+  
+  the increasing of the number of users will not affect the performance
+  no big analysis is done on the data of the database so the speed is not affected as well
+  but since we will use an api to bring the food database the internet speed might slow the user if his connection is poor
+  other then that ,it will take less than 2 seconds to process and respond
+  
+  query and reporting time :not yet
+  throughput : not yet  
+  storage : not yet
+  
+  
+  
+  security
+  
+  authentication is required for each user 
+  each user will have a user name and a password 
+  and each user will have authorization to his account only 
+  
+  the user activity will be recorded *only for safety*
+  
+  availablity 
+   
+   the system will be available as long as you have an internet connection
+   
+   
+   maintability
+   
+   this application is designed to simulate myfitnesspal a very famous web application with a similar tasks 
     
     
-    
-    
+ References 
+ 
+ feasibility study example.pdf
+ https://www.researchgate.net/publication/310782747_Feasibility_and_Effectiveness_of_Using_Wearable_Activity_Trackers_in_Youth_A_Systematic_Review    
     
