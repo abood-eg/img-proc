@@ -31,7 +31,11 @@
  
     abstract 
     
-    -health tracking web application is an effictive methods to keep you healthy , this application contains a database of almost all the food and the calories that you will happen to eat , you can creat an account provide the application with your info then the app will help you track your calories and your weight help you be in a healthy body ,this application is needed by all ages men or women ,health tracking application allow you to choose your meals and calculate the calories in the meal you eat ,contains a list of food to choose from * like a menu * ,the app will evaluate your performance ,the amount of weight you lost and how far you need to go .
+    -health tracking web application is an effictive methods to keep you healthy , this application contains a database of almost all the food
+  and the calories that you will happen to eat , you can creat an account provide the application with your info then the app will help you
+  track your calories and your weight help you be in a healthy body ,this application is needed by all ages men or women ,health tracking
+  application allow you to choose your meals and calculate the calories in the meal you eat ,contains a list of food to choose from *like a     
+  menu *,the app will evaluate your performance ,the amount of weight you lost and how far you need to go .
     
  Objectives:
 
@@ -43,16 +47,18 @@
     
   the need for the project :
   
-    it is hard to lose weight with this amount of resturants arround you ,it's hard to know how much weight you gained how much calories you have burnt ,this app provide a simple solution .
+    it is hard to lose weight with this amount of resturants arround you ,it's hard to know how much weight you gained how much calories you have
+     burnt ,this app provide a simple solution .
     it's needed by :
     - athelets and players
     - elder with diabetes and cholestrol
     - women 
     - the public in genral
     
+   Existing Systems And Tech :
    
-   existing systems and tech :
-   an example of this application is the famous web application myfitnesspal . this application contains some of the ideas we are using in health tracking app ,although this application is more concerned with your health and body status 
+   an example of this application is the famous web application myfitnesspal . this application contains some of the ideas we are using in health
+    tracking app ,although this application is more concerned with your health and body status 
        
  
  Tools and Resources
@@ -161,17 +167,20 @@ Users of the project ::
   authentication is required for each user 
   each user will have a user name and a password 
   and each user will have authorization to his account only 
-  
   the user activity will be recorded *only for safety*
+  
+  
   
   availablity 
    
    the system will be available as long as you have an internet connection
    
    
+   
    maintability
    
-   this application is designed to simulate myfitnesspal a very famous web application with a similar tasks 
+   in this application the engineers uses thir background of oop and rup to design this web application
+   ,the application is well structured and designed to simulate a very famous website
     
     
  References 
