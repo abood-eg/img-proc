@@ -92,25 +92,28 @@ def inimg():
 		dd=cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 		cv.imshow('gray',dd)
 		cv.waitKey(0)
+		cv.imwrite('gray-img.png',dd)
 	if (c.get()==1):
 	    img = cv.imread(file_path,cv.IMREAD_GRAYSCALE)
 	    sp_img=salt_pepper(img)
 	    cv.imshow('salt & pepper',sp_img)
 	    cv.waitKey(0)
+	    cv.imwrite('salt & pepper.png',sp_img)
 	elif (c.get()==2):
 		img = cv.imread(file_path,0)
 		img1 = random_noise(img,'gaussian', mean=0.1,var=0.01)
 		img1 = np.uint8(img1*255)
-		cv.imshow('img1', img1)
+		cv.imshow('gaussian', img1)
 		cv.waitKey(0)
 		cv.destroyAllWindows()	
+		cv.imwrite('gaussian.png',img1)
 	elif (c.get()==3):
 		img = (cv.imread(file_path)).astype(float)
 		noise_mask = np.random.poisson(img) 
 		noisy_img = img + noise_mask
 		cv.imshow('poisson',noisy_img)
 		cv.waitKey(0)
-    
+		cv.imwrite('poisson.png',noisy_img)
    
         		
 ## increase the brightness 
@@ -129,7 +132,7 @@ def bright():
 	cv.imshow('Brightness', image)
 	cv.waitKey(0)
 	cv.destroyAllWindows()
-
+	cv.imwrite('brightness.png',image)
 ### contrast adj 
 def contrast_adj():
 	img = cv.imread(file_path)
@@ -137,6 +140,7 @@ def contrast_adj():
 	imghsv[:,:,2] = [[max(pixel - 25, 0) if pixel < 190 else min(pixel + 25, 255) for pixel in row] for row in imghsv[:,:,2]]
 	cv.imshow('contrast', cv.cvtColor(imghsv, cv.COLOR_HSV2BGR))
 	cv.waitKey(0)
+	cv.imwrite("contrast.png", cv.cvtColor(imghsv, cv.COLOR_HSV2BGR))
 ## now the histogram of the photo
 def cv_histogram():
 	img = cv.imread(file_path,0)
@@ -153,7 +157,9 @@ def histo_eq():
 	plt.xlim([0,256])
 	plt.legend(('cdf','histogram'), loc = 'upper left')
 	plt.show()
+	cv.imshow('hest_eq',img)
 	cv.waitKey(0)
+
 
 ### low pass filter 
 def lo_pass():
@@ -165,23 +171,25 @@ def lo_pass():
 # Store LPF image as lpf.jpg
 	cv.imshow("lpf.jpg", dst)
 	cv.waitKey(0)
+	cv.imwrite('lpdf.png',dst)
 
 ###avg filter
 def avg():
 
 # Read MyPic.jpg from system as grayscale
-	img = cv.imread("1.jpg", 0)
+	img = cv.imread(file_path, 0)
 # Apply Averaging blur
 	blur = cv.blur(img,(5,5))
-
 	cv.imshow("AvgBlur.jpg", blur)
 	cv.waitKey(0)
+	cv.imshow('avg.png',blur)
 ### median filter
 def median_filter():
 	img=cv.imread(file_path,0)
 	img = cv.medianBlur(img,9)
 	cv.imshow('median',img)
 	cv.waitKey(0)
+	cv.imwrite('median.png',img)
 
 ### high pass filter
 def hi_pass():
@@ -191,6 +199,7 @@ def hi_pass():
 
 	cv.imshow('highpass', img)
 	cv.waitKey(0)	
+	cv.imwrite('highpass.png',img)
 
 #### erosion and dilation
 def erode():
@@ -199,12 +208,14 @@ def erode():
 	erosion = cv.erode(img,kernel,iterations = 1)
 	cv.imshow('erosion',erosion)
 	cv.waitKey(0)
+	cv.imwrite('erosion.png',erosion)
 def dilate():
 	img = cv.imread(file_path,0)
 	kernel = np.ones((5,5),np.uint8)
 	dilation = cv.dilate(img,kernel,iterations = 1)
 	cv.imshow('dilation',dilation)
 	cv.waitKey(0)	
+	cv.imwrite('dilation.png',dilation)
 
 ### opening and closing
 
@@ -214,12 +225,14 @@ def openin():
 	opening = cv.morphologyEx(img, cv.MORPH_OPEN, kernel)
 	cv.imshow('opening',opening)
 	cv.waitKey(0)	
+	cv.imwrite('opening.png',opening)
 def closin():
 	img = cv.imread(file_path,0)
 	kernel = np.ones((5,5),np.uint8)
 	closing = cv.morphologyEx(img, cv.MORPH_CLOSE, kernel)	
 	cv.imshow('closing',closing)
 	cv.waitKey(0)
+	cv.imwrite('closing.png',closing)
 
 ### line detction and circle detection
 def line_detection():
@@ -236,6 +249,7 @@ def line_detection():
 	        cv.line(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
 	cv.imshow("line detected",img)
 	cv.waitKey(0)
+	cv.imwrite('line detection.png',img)
 def circle_detection():
 
 	img = cv.imread(file_path,0)
@@ -251,6 +265,7 @@ def circle_detection():
 	cv.imshow('detected circles',cimg)
 	cv.waitKey(0)
 	cv.destroyAllWindows()
+	cv.imwrite("detected circles.jpg",cimg)
 
 
 LabelFrame(root, text=" load image ", width=160, height=70).place(x=10,y=10)
