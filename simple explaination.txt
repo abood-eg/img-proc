@@ -1,0 +1,26 @@
+this is a simple annotation to show how the program work 
+
+i used open cv python to write thos program  
+i also used some of  liperaries like tkinter and numpy ...etc
+
+///// help while useing the program
+
+if u r choosing a radio button "u have to chose it first then add the image "
+
+if u r choosing a button " u have to add the image first then click the button "
+
+
+
+it's as simple as that 
+
+
+enjoy
+
+
+the manual can help u through ur work 
+
+
+i hope i did a good job 
+
+
+

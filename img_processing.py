@@ -8,7 +8,7 @@ from matplotlib import pyplot as plt
 import math
 from scipy import ndimage
 root = tk.Tk()
-root.title(	'shitty img manipulation')
+root.title(	'img manipulation')
 root.geometry("850x700")	
 
 
@@ -81,6 +81,16 @@ def random_noise(image, mode='gaussian', seed=None, clip=True, **kwargs):
         out = np.clip(out, low_clip, 1.0)
         
     return out
+### prewitt
+def PreWitt(img):
+	gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+	img_gaussian = cv.GaussianBlur(gray,(3,3),0)
+	kernelx = np.array([[1,1,1],[0,0,0],[-1,-1,-1]])
+	kernely = np.array([[-1,0,1],[-1,0,1],[-1,0,1]])
+	img_prewittx = cv.filter2D(img_gaussian, -1, kernelx)
+	img_prewitty = cv.filter2D(img_gaussian, -1, kernely)
+	return img_prewittx,img_prewitty
+
 def inimg():
 	global file_path
 	file_path =fd.askopenfilename()
@@ -114,6 +124,75 @@ def inimg():
 		cv.imshow('poisson',noisy_img)
 		cv.waitKey(0)
 		cv.imwrite('poisson.png',noisy_img)
+##### edge detection filter
+	if d.get()==2:
+		img = cv.imread(file_path)
+		dst = cv.GaussianBlur(img,(5,5),cv.BORDER_DEFAULT) 
+		cv.imshow('image',dst)
+		cv.waitKey(0);
+		cv.destroyAllWindows();
+		cv.waitKey(1)
+	elif d.get()==1:
+		limg = cv.imread(file_path)
+		s = cv.cvtColor(limg, cv.COLOR_BGR2GRAY)
+		s = cv.Laplacian(s, cv.CV_16S, ksize=3)
+		s = cv.convertScaleAbs(s)
+		cv.imshow('nier',s)
+		cv.waitKey(0)
+	elif d.get()==4:
+		gray1 = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+		img = cv.GaussianBlur(gray1,(3,3),0)
+		sobelx = cv.Sobel(img,cv.CV_64F,1,0,ksize=5)  # x
+		cv.imshow('',sobelx)
+		cv.waitKey(0)
+	elif d.get()==3:
+		sobely = cv.Sobel(img,cv.CV_64F,0,1,ksize=5)  # y	
+		cv.imshow('',sobely)
+		cv.waitKey(0)
+	px,py= PreWitt(img)
+	if d.get()==5:
+		
+		cv.imshow('PreWittx', px)
+		cv.waitKey(0)
+	elif d.get()==6:
+		cv.imshow('PreWitty', py)
+		cv.waitKey(0)		
+	elif d.get()==7:
+		blur = cv.GaussianBlur(img,(3,3),0)
+		laplacian = cv.Laplacian(blur,cv.CV_64F)	
+		cv.imshow('log2',laplacian)
+		cv.waitKey(0)
+		laplacian1 = laplacian/laplacian.max()
+		cv.imshow('log7',laplacian1)
+		cv.waitKey(0)
+	elif d.get()==8:
+		img=cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+		edges = cv.Canny(img,100,200)
+		cv.imshow('canny',edges)
+		cv.waitKey()
+	elif d.get()==11:
+		img=cv.imread(file_path,0)
+		size = np.size(img)
+		skel = np.zeros(img.shape,np.uint8)
+		 
+		ret,img = cv.threshold(img,127,255,0)
+		element = cv.getStructuringElement(cv.MORPH_CROSS,(3,3))
+		done = False
+		 
+		while( not done):
+		    eroded = cv.erode(img,element)
+		    temp = cv.dilate(eroded,element)
+		    temp = cv.subtract(img,temp)
+		    skel = cv.bitwise_or(skel,temp)
+		    img = eroded.copy()
+		    zeros = size - cv.countNonZero(img)
+		    if zeros==size:
+		        done = True
+		 
+		cv.imshow("skel",skel)
+		cv.waitKey(0)
+		cv.destroyAllWindows()
+			
    
         		
 ## increase the brightness 
@@ -177,7 +256,7 @@ def lo_pass():
 def avg():
 
 # Read MyPic.jpg from system as grayscale
-	img = cv.imread(file_path, 0)
+	img = cv.imread(file_path , 0)
 # Apply Averaging blur
 	blur = cv.blur(img,(5,5))
 	cv.imshow("AvgBlur.jpg", blur)
@@ -314,15 +393,15 @@ LabelFrame(root,text='edge detection filters ',width=590,height=100).place(x = 2
 edge1 = Radiobutton(root ,text= 'lablacian',variable=d,value =1).place(x=200,y=300)
 edge2 = Radiobutton(root ,text= 'gaussian',variable=d,value =2).place(x=200,y=320)
 edge3 = Radiobutton(root ,text= 'vert.sobel',variable=d,value =3).place(x=200,y=340)
-edge12 = Radiobutton(root ,text= 'horis.sobel',variable=d,value =4).place(x=350,y=300)
-edge4 = Radiobutton(root ,text= 'vert.prewit',variable=d,value =5).place(x=350,y=320)
-edge5 = Radiobutton(root ,text= 'horis.prewit',variable=d,value =6).place(x=350,y=340)
-edge6 = Radiobutton(root ,text= 'lab of gaws',variable=d,value =7).place(x=500,y=300)
-edge7 = Radiobutton(root ,text= 'canny ',variable=d,value =8).place(x=500,y=320)
-edge8 = Radiobutton(root ,text= 'zero cross',variable=d,value =9).place(x=500,y=340)
-edge9 = Radiobutton(root ,text= 'thiken',variable=d,value =10).place(x=650,y=300)
-edge10 = Radiobutton(root ,text= 'skelton',variable=d,value =11).place(x=650,y=320)
-edge11 = Radiobutton(root ,text= 'thinening',variable=d,value =12).place(x=650,y=340)
+edge4 = Radiobutton(root ,text= 'horis.sobel',variable=d,value =4).place(x=350,y=300)
+edge5 = Radiobutton(root ,text= 'vert.prewit',variable=d,value =5).place(x=350,y=320)
+edge6 = Radiobutton(root ,text= 'horis.prewit',variable=d,value =6).place(x=350,y=340)
+edge7 = Radiobutton(root ,text= 'lab of gaws',variable=d,value =7).place(x=500,y=300)
+edge8 = Radiobutton(root ,text= 'canny ',variable=d,value =8).place(x=500,y=320)
+edge9 = Radiobutton(root ,text= 'zero cross',variable=d,value =9).place(x=500,y=340)
+edge10 = Radiobutton(root ,text= 'thickening',variable=d,value =10).place(x=650,y=300)
+edge11 = Radiobutton(root ,text= 'skelton',variable=d,value =11).place(x=650,y=320)
+edge12 = Radiobutton(root ,text= 'thinening',variable=d,value =12).place(x=650,y=340)
 
 
 #global transform
